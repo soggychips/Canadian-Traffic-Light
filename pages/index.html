@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<title>Canadian Traffic Light</title>
+		<meta name="description" content="Web interface for Canada Traffic Light program" />
+		<meta name="author" content="Churro" />
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+		<!-- Reddit icon, lol -->
+		<link type="image/x-icon" rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB
+		AAAAAQCAYAAAAf8/9hAAACu0lEQVQ4T52TaUhUURiGnztzvTqarWNubUQEtiCpZZahSUXZWERBZlKBSlDZQhtGeS8WS
+		JsR1A8NiiDNKDScIjB/hNIiyqSpGC00YTJTksvkOOM4ers5EEFY0YHvz3c4D7zLEWyqmtTrIJn/OAESCG09qtzX7VLG
+		fC8ICDoByU+H16ti67Ti7HcwZ+5CREn3d0B7Sz1XC08SEhZJ+LRZeHo+ERJiJGTuYlI3pf8ZoBf1XD59nJ17DzBxchg
+		1D8uR+r+weMkSysxP2HMsf2yAoNNhCBQ5tHMLF2/cxT0wxA/gnRtX6O76QtbBEwQGGnwA5zePotcLDA/DsNfDy4Zamh
+		sasH+y0v6qkRWrN7AgNo64hBQNGoQ6MsKINn6SHqG9b0g+ffiw0vu5g4AJRjyOLkzr1rA8MZHp02cgaCba7XaeP3tK1
+		YNHYJjIsLObAZebrKOnEFJM6XL2NpPy/EU98fHxZGRkwOs2mBoGk6f4wnG74N0bWBDN4+pqbpWWUlxczNYdOQi79p2Q
+		HZ3tSlJyMrm5ufC1CyIiYX0qVNz3AY4fQThfhPqyEaJjMJvNVFZWIE2KROhUVTlj7Ublwb1SgoKC0ARC0QWIi4OkFB+
+		gpRnKyiBf1iQEjq6WJq7kurka4f2gKuft3qdcOpNHeETEP/XR7XazeXs2567d8qXQamlSHt++SklJySigpqYGi8VCWl
+		oakiRRV1eHKIpkZmaO3iuKTGjUMhKSVvkA/Y5BpbqqHGtTHYWFhRiNRmpra2nQovR6vURFRWEymXA6nRQUFKCOCyU9a
+		z96/S9V1os6OqxvuXnlLOP9NQtiFhGhSdJphbLZbFiamrF3O0nPOcC8hbEaeAR/g/h7E/38RVwDbqzvWrF3ftQKoxIW
+		OY2Zs+cTPD4Yz6D3p0/+ARrgg0uVe3qGxv6Nf7A1wKDjO61YMDnUti/LAAAAAElFTkSuQmCC">
+
+		<style>
+			* {
+				text-rendering: optimizelegibility;
+			}
+			body {
+				margin: 20px auto 0;
+				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+				font-size: 14px;
+				line-height: 20px;
+				color: #333;
+				background-color: #fff;
+				width: 700px;
+			}
+			h1 {
+				font-size: 39px;
+				height: 40px;
+				line-height: 40px;
+				margin: 10px 0;
+			}
+			input {
+				border: 1px solid #ccc;
+				box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+				transition: border linear 0.2s, box-shadow linear 0.2s;
+				display: inline-block;
+				height: 20px;
+				padding: 4px 6px;
+				margin-bottom: 10px;
+				font-size: 14px;
+				line-height: 20px;
+				color: #555;
+				vertical-align: middle;
+				border-radius: 4px;
+				margin-left: 0;
+				font-weight: normal;
+				margin: 0;
+			}
+			input:focus {
+				border-color: rgba(82, 168, 236, 0.8);
+				outline: 0;
+				outline: thin dotted \9;
+				box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+			}
+			.control-group {
+				margin-bottom: 10px;
+			}
+			.form-horizontal .control-label {
+				float: left;
+				width: 160px;
+				padding-top: 5px;
+				text-align: right;
+			}
+
+			.form-horizontal .controls {
+				*display: inline-block;
+				*padding-left: 20px;
+				margin-left: 180px;
+				*margin-left: 0;
+			}
+			input:focus:invalid:focus {
+				border-color: #e9322d;
+				-webkit-box-shadow: 0 0 6px #f8b9b7;
+				-moz-box-shadow: 0 0 6px #f8b9b7;
+				box-shadow: 0 0 6px #f8b9b7;
+			}
+			fieldset {
+				padding: 0;
+				margin: 0;
+				border: 0;
+			}
+			legend {
+				display: block;
+				width: 100%;
+				padding: 0;
+				margin-bottom: 20px;
+				font-size: 21px;
+				line-height: 40px;
+				border: 0;
+				border-bottom: 1px solid #e5e5e5;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+
+			<h1>Canadian Traffic Light</h1>
+			<form class="form-horizontal" action="submit.cgi" method="post">
+
+				<fieldset>
+					<legend>
+						North/South
+					</legend>
+					<div class="control-group">
+						<label class="control-label" for="arrowDuration">Left Duration</label>
+						<div class="controls">
+							<input type="text" name="left1" id="arrowDuration" placeholder="5"
+							pattern="^\d+$" required="required" maxlength="3" value="3">
+							<span>&nbsp; seconds</span>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="greenDuration">Green Duration</label>
+						<div class="controls">
+							<input type="text" name="green1" id="greenDuration" placeholder="5"
+							pattern="^\d+$" required="required" maxlength="3" value="5">
+							<span>&nbsp; seconds</span>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="yellowDuration">Yellow Duration</label>
+						<div class="controls">
+							<input type="text" name="yellow1" id="yellowDuration" placeholder="5"
+							pattern="^\d+$" required="required" maxlength="3" value="1">
+							<span>&nbsp; seconds</span>
+						</div>
+					</div>
+				</fieldset>
+
+				<fieldset>
+					<legend>
+						East/West
+					</legend>
+					<div class="control-group">
+						<label class="control-label" for="arrowDuration2">Left Duration</label>
+						<div class="controls">
+							<input type="text" name="left2" id="arrowDuration2" placeholder="5"
+							pattern="^\d+$" required="required" maxlength="3" value="3">
+							<span>&nbsp; seconds</span>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="greenDuration2">Green Duration</label>
+						<div class="controls">
+							<input type="text" name="green2" id="greenDuration2" placeholder="5"
+							pattern="^\d+$" required="required" maxlength="3" value="5">
+							<span>&nbsp; seconds</span>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="yellowDuration2">Yellow Duration</label>
+						<div class="controls">
+							<input type="text" name="yellow2" id="yellowDuration2" placeholder="5"
+							pattern="^\d+$" required="required" maxlength="3" value="1">
+							<span>&nbsp; seconds</span>
+						</div>
+					</div>
+				</fieldset>
+
+				<div class="control-group">
+					<div class="controls">
+						<button type="submit" class="btn" >
+							Submit
+						</button>
+					</div>
+				</div>
+				
+			</form>
+		</div>
+		
+	</body>
+</html>
